@@ -1,17 +1,43 @@
-#[derive(Debug)]
-struct Structure(i32);
+use std::fmt;
 
 #[derive(Debug)]
-struct Deep(Structure);
+struct MinMax(i64, i64);
+
+impl fmt::Display for MinMax {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "({}, {})", self.0, self.1)
+    }
+}
+
+#[derive(Debug)]
+struct Point2 {
+    x: f64,
+    y: f64
+}
+
+impl fmt::Display for Point2 {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "x: {}, y: {}", self.x, self.y)
+    }
+}
 
 fn main() {
-    println!("{:?} months in a year.", 12);
-    println!("{1:?}, {0:?} is the actor {name:?}.",
-             "Slater",
-             "Christian",
-             name="actor's");
+    let minmax = MinMax(0, 14);
 
-    println!("Now {:?} will print!", Structure(3));
+    println!("Compare structures");
+    println!("Display: {}", minmax);
+    println!("Debug: {:?}", minmax);
 
-    println!("Only a 7? {:?}", Deep(Structure(7)));
+    let big_range = MinMax(-300, 300);
+    let small_range = MinMax(-3, 3);
+
+    println!("The big range is {big} and the small range is {small}",
+             small = small_range,
+             big = big_range);
+
+    let point = Point2 { x: 3.2, y: 7.4 };
+
+    println!("Compare points:");
+    println!("Display: {}", point);
+    println!("Debug: {:?}", point);
 }
